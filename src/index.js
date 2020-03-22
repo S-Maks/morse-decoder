@@ -37,10 +37,40 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-function decode(expr) {
-    // write your solution here
-}
 
+function decode(expr)
+{
+    //var expr = '00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010'; 
+      var coderResult = '';
+      var result = '';
+      var temp = '';
+      //function decode(expr) {
+        // write your solution here
+      
+        for(let j = 0; j<expr.length; j+=10){
+          if(expr[j]==='*'){
+            result +=' ';
+          }
+          else{
+      
+            for(let i = j; i<j+10; i+=2){
+              temp += expr[i] + expr[i+1];
+              if(temp != '00'){
+                if(temp =='10'){
+                  coderResult+='.';
+                }else{
+                  coderResult += '-';
+                }
+              }
+              temp = '';  
+          }
+          
+          result+= MORSE_TABLE[coderResult];
+          coderResult = '';
+        }
+      }
+    return result;
+}
 module.exports = {
     decode
 }
